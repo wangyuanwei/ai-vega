@@ -27,11 +27,12 @@ def pridect(imagePath, modelPath):
     # 5. 传入模型
     output = model(x)
     # 6. 使用argmax选出最有可能的结果
-    output = torch.argmax(output)
-    print("预测结果：", Common.labels[output.item()])
+    output_max_idx = torch.argmax(output)
+    print("预测结果：", Common.labels[output_max_idx.item()],
+          round(output[0][output_max_idx].detach().numpy().tolist(), 5))
 
 
 if __name__ == '__main__':
-    pic_path = "/Users/wyw/Desktop/test/cate=打底裤,title=蚕莎芭比外穿打底瑜伽提臀收腹春秋鲨鱼骑行长裤路薄款沙女神夏季,attr=长裤,.jpeg"
+    pic_path = "./test/t.jpeg"
     model_path = "./model/clothing_reg-2023-02-20-15-28-19.pth"
     pridect(pic_path, model_path)
